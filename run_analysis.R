@@ -42,25 +42,25 @@ mean_std <- select(whole, Subject, Act_ID, V1:V6, V41:V46,
   group_by(Subject, Activity)
 
 ## Extract labels for variables
-fea_sub <- feature[c(1:6,41:46,81:86,121:126,
+fea_sub <- feature$V2[c(1:6,41:46,81:86,121:126,
                      161:166,201:202,214:215,227:228,
                      240:241,253:254,266:271,345:350,
-                     424:429,503:504,516:517,529:530,542:543),]
+                     424:429,503:504,516:517,529:530,542:543)]
 
 ## Rename certain labels
-fea_sub$V2[61:66] <- c("fBodyAccJerkMag-mean()",
-                      "fBodyAccJerkMag-std()",
-                      "fBodyGyroMag-mean()",
-                      "fBodyGyroMag-std()",
-                      "fBodyGyroJerkMag-mean()",
-                      "fBodyGyroJerkMag-std()")
+fea_sub[61:66] <- c("fBodyAccJerkMag-mean()",
+                    "fBodyAccJerkMag-std()",
+                    "fBodyGyroMag-mean()",
+                    "fBodyGyroMag-std()",
+                    "fBodyGyroJerkMag-mean()",
+                    "fBodyGyroJerkMag-std()")
 
-fea_sub$V2 <- gsub("-mean\\()", "Mean", fea_sub$V2)
-fea_sub$V2 <- gsub("-std\\()", "SD", fea_sub$V2)
-fea_sub$V2 <- gsub("-", "_", fea_sub$V2)
+fea_sub <- gsub("-mean\\()", "Mean", fea_sub)
+fea_sub <- gsub("-std\\()", "SD", fea_sub)
+fea_sub <- gsub("-", "_", fea_sub)
 
 ## Label columns
-names(mean_std) <- c("Subject", "Activity", fea_sub$V2)
+names(mean_std) <- c("Subject", "Activity", fea_sub)
 
 ## Summary of average of each variable for each activity
 ## and each subject
