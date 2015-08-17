@@ -11,7 +11,6 @@ test_mea <- read.table("./test/X_test.txt", stringsAsFactors = FALSE)
 test_act <- read.table("./test/y_test.txt", stringsAsFactors = FALSE)
 test_sub <- read.table("./test/subject_test.txt", stringsAsFactors = FALSE)
 activity <- read.table("activity_labels.txt", stringsAsFactors = FALSE)
-features <- read.table("features.txt", stringsAsFactors = FALSE)
 
 ## Assign Column Names
 names(train_act) <- "Act_ID"
@@ -41,9 +40,15 @@ mean_std <- select(whole, Subject, Act_ID, V1:V6, V41:V46,
   arrange(Subject, Activity) %>%
   group_by(Subject, Activity)
 
+## Generate labels for variables and label variables
+MS <- rep("MS", times = 66)
+id <- c(1:66)
+label_ms <- paste(MS, id, sep = "")
+names(mean_std) <- c("Subject", "Activity", label_ms)
+
 ## Summary of average of each variable for each activity
 ## and each subject
-sum_ms <- summarise_each(mean_std, funs(mean), V1:V543)
+sum_ms <- summarise_each(mean_std, funs(mean), MS1:MS66)
 
 ## Generate table
 write.table(sum_ms, file = "summary.txt", row.names = FALSE)
