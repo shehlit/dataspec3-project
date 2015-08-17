@@ -78,7 +78,11 @@ The variable whole is 1 single data set with all the measurements done on all vo
 ####Task 2: Extract the required measurements
 The required measurements are the mean and standard deviation for each measurement. After checking the labels in features.txt, it is found that the required measurements are found in certain columns. Hence the next step is to extract them using the select function in dplyr package, assign to another variable mean_std.
 ```{r}
-mean_std <- select(whole, Subject, Act_ID, V1:V6, V41:V46, V81:V86, V121:V126, V161:V166, V201:V202, V214:V215, V227:V228, V240:V241, V253:V254, V266:V271, V345:V350, V424:V429, V503:V504, V516:V517, V529:V530, V542:V543) %>%
+mean_std <- select(whole, Subject, Act_ID, V1:V6, V41:V46,
+                   V81:V86, V121:V126, V161:V166, V201:V202,
+                   V214:V215, V227:V228, V240:V241, V253:V254,
+                   V266:V271, V345:V350, V424:V429, V503:V504,
+                   V516:V517, V529:V530, V542:V543) %>%
 ```
 
 ####Task 3: Use actual description of the activities
@@ -99,7 +103,10 @@ To perform this task, the following steps are used:
 ####Task 4: Use descriptive variable names appropriately
 To achieve this, the first step is to find the description of the variables from the variable feature.
 ```{r}
-fea_sub <- feature$V2[c(1:6, 41:46, 81:86, 121:126, 161:166, 201:202, 214:215, 227:228, 240:241, 253:254, 266:271, 345:350, 424:429, 503:504, 516:517, 529:530, 542:543)]
+fea_sub <- feature$V2[c(1:6,41:46,81:86,121:126,
+                     161:166,201:202,214:215,227:228,
+                     240:241,253:254,266:271,345:350,
+                     424:429,503:504,516:517,529:530,542:543)]
 ```
 
 Fixing some labels in the fea_sub character vector:
