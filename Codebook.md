@@ -7,6 +7,7 @@ Meaning of prefixes:
 
 Notes:
 - The values are normalized and bounded within [-1,1].
+- The values are the averages of repeated measurements of the same quantity.
 - The units of the data labels are attached with the constants which the measurements used to normalized with.
 
 Data Label | Description
