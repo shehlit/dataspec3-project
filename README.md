@@ -136,7 +136,8 @@ Acc          |  Accelerometer
 Gyro         |  Gyroscope
 Jerk         |  Jerk
 t            |  measurement in time domain 
-f            |  measurement in frequency domain Mean         |  Mean / Average
+f            |  measurement in frequency domain
+Mean         |  Mean / Average
 SD           |  Standard Deviation
 Mag          |  Magnitude
 \_X/Y/Z       |  x/y/z component

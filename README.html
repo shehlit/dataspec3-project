@@ -176,7 +176,11 @@ whole &lt;- tbl_df(whole)</code></pre>
 <div id="task-2-extract-the-required-measurements" class="section level4">
 <h4>Task 2: Extract the required measurements</h4>
 <p>The required measurements are the mean and standard deviation for each measurement. After checking the labels in features.txt, it is found that the required measurements are found in certain columns. Hence the next step is to extract them using the select function in dplyr package, assign to another variable mean_std.</p>
-<pre class="{r}"><code>mean_std &lt;- select(whole, Subject, Act_ID, V1:V6, V41:V46, V81:V86, V121:V126, V161:V166, V201:V202, V214:V215, V227:V228, V240:V241, V253:V254, V266:V271, V345:V350, V424:V429, V503:V504, V516:V517, V529:V530, V542:V543) %&gt;%</code></pre>
+<pre class="{r}"><code>mean_std &lt;- select(whole, Subject, Act_ID, V1:V6, V41:V46,
+                   V81:V86, V121:V126, V161:V166, V201:V202,
+                   V214:V215, V227:V228, V240:V241, V253:V254,
+                   V266:V271, V345:V350, V424:V429, V503:V504,
+                   V516:V517, V529:V530, V542:V543) %&gt;%</code></pre>
 </div>
 <div id="task-3-use-actual-description-of-the-activities" class="section level4">
 <h4>Task 3: Use actual description of the activities</h4>
@@ -195,7 +199,10 @@ whole &lt;- tbl_df(whole)</code></pre>
 <div id="task-4-use-descriptive-variable-names-appropriately" class="section level4">
 <h4>Task 4: Use descriptive variable names appropriately</h4>
 <p>To achieve this, the first step is to find the description of the variables from the variable feature.</p>
-<pre class="{r}"><code>fea_sub &lt;- feature$V2[c(1:6, 41:46, 81:86, 121:126, 161:166, 201:202, 214:215, 227:228, 240:241, 253:254, 266:271, 345:350, 424:429, 503:504, 516:517, 529:530, 542:543)]</code></pre>
+<pre class="{r}"><code>fea_sub &lt;- feature$V2[c(1:6,41:46,81:86,121:126,
+                     161:166,201:202,214:215,227:228,
+                     240:241,253:254,266:271,345:350,
+                     424:429,503:504,516:517,529:530,542:543)]</code></pre>
 <p>Fixing some labels in the fea_sub character vector:</p>
 <pre class="{r}"><code>fea_sub[61:66] &lt;- c(&quot;fBodyAccJerkMag-mean()&quot;,
                     &quot;fBodyAccJerkMag-std()&quot;,
@@ -240,17 +247,21 @@ fea_sub &lt;- gsub(&quot;-&quot;, &quot;_&quot;, fea_sub)</code></pre>
 </tr>
 <tr class="even">
 <td align="left">f</td>
-<td align="left">measurement in frequency domain Mean</td>
+<td align="left">measurement in frequency domain</td>
 </tr>
 <tr class="odd">
+<td align="left">Mean</td>
+<td align="left">Mean / Average</td>
+</tr>
+<tr class="even">
 <td align="left">SD</td>
 <td align="left">Standard Deviation</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Mag</td>
 <td align="left">Magnitude</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">_X/Y/Z</td>
 <td align="left">x/y/z component</td>
 </tr>
