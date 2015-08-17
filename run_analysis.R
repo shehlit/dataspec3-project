@@ -11,6 +11,7 @@ test_mea <- read.table("./test/X_test.txt", stringsAsFactors = FALSE)
 test_act <- read.table("./test/y_test.txt", stringsAsFactors = FALSE)
 test_sub <- read.table("./test/subject_test.txt", stringsAsFactors = FALSE)
 activity <- read.table("activity_labels.txt", stringsAsFactors = FALSE)
+feature <- read.table("features.txt", stringsAsFactors = FALSE)
 
 ## Assign Column Names
 names(train_act) <- "Act_ID"
@@ -40,15 +41,30 @@ mean_std <- select(whole, Subject, Act_ID, V1:V6, V41:V46,
   arrange(Subject, Activity) %>%
   group_by(Subject, Activity)
 
-## Generate labels for variables and label variables
-MS <- rep("MS", times = 66)
-id <- c(1:66)
-label_ms <- paste(MS, id, sep = "")
-names(mean_std) <- c("Subject", "Activity", label_ms)
+## Extract labels for variables
+fea_sub <- feature[c(1:6,41:46,81:86,121:126,
+                     161:166,201:202,214:215,227:228,
+                     240:241,253:254,266:271,345:350,
+                     424:429,503:504,516:517,529:530,542:543),]
+
+## Rename certain labels
+fea_sub$V2[61:66] <- c("fBodyAccJerkMag-mean()",
+                      "fBodyAccJerkMag-std()",
+                      "fBodyGyroMag-mean()",
+                      "fBodyGyroMag-std()",
+                      "fBodyGyroJerkMag-mean()",
+                      "fBodyGyroJerkMag-std()")
+
+fea_sub$V2 <- gsub("-mean\\()", "Mean", fea_sub$V2)
+fea_sub$V2 <- gsub("-std\\()", "SD", fea_sub$V2)
+fea_sub$V2 <- gsub("-", "_", fea_sub$V2)
+
+## Label columns
+names(mean_std) <- c("Subject", "Activity", fea_sub$V2)
 
 ## Summary of average of each variable for each activity
 ## and each subject
-sum_ms <- summarise_each(mean_std, funs(mean), MS1:MS66)
+sum_ms <- summarise_each(mean_std, funs(mean), tBodyAccMean_X:fBodyGyroJerkMagSD)
 
 ## Generate table
 write.table(sum_ms, file = "summary.txt", row.names = FALSE)
